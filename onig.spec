@@ -10,6 +10,7 @@ License:	BSD
 Group:		System/Libraries
 URL:		http://www.geocities.jp/kosako3/oniguruma/
 Source0:	http://www.geocities.jp/kosako3/oniguruma/archive/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Oniguruma is a regular expressions library. The characteristics of this library
