@@ -2,7 +2,7 @@
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
-Summary:	Oniguruma is a regular expressions library
+Summary:	Regular expressions library
 Name:		onig
 Version:	5.9.0
 Release:	%mkrel 1
@@ -29,7 +29,7 @@ Supported character encodings:
  o (CP1251 encoding was contributed by Byte)
 
 %package -n	%{libname}
-Summary:	Oniguruma is a regular expressions library
+Summary:	Regular expressions library
 Group:          System/Libraries
 
 %description -n	%{libname}
