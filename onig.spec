@@ -5,7 +5,7 @@
 Summary:	Regular expressions library
 Name:		onig
 Version:	5.9.0
-Release:	%mkrel 2
+Release:	%mkrel 4
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.geocities.jp/kosako3/oniguruma/
