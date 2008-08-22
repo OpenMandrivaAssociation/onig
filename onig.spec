@@ -4,12 +4,13 @@
 
 Summary:	Regular expressions library
 Name:		onig
-Version:	5.9.0
-Release:	%mkrel 4
+Version:	5.9.1
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.geocities.jp/kosako3/oniguruma/
 Source0:	http://www.geocities.jp/kosako3/oniguruma/archive/%{name}-%{version}.tar.gz
+BuildRequires:	libtool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -86,6 +87,8 @@ find . -type f -perm 0555 -exec chmod 755 {} \;
 find . -type f -perm 0444 -exec chmod 644 {} \;
 
 %build
+touch NEWS ChangeLog
+autoreconf -fis
 
 %configure2_5x
 
@@ -113,13 +116,13 @@ rm -rf %{buildroot}
 %files -n %{libname}
 %defattr(-,root,root)
 %doc AUTHORS COPYING HISTORY README README.ja index.html index_ja.html
-%attr(0755,root,root) %{_libdir}/*.so.*
+%attr(0755,root,root) %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
 %defattr(-,root,root)
 %doc doc/*
 %attr(0755,root,root) %{_bindir}/*
 %attr(0644,root,root) %{_includedir}/*.h
-%attr(0644,root,root) %{_libdir}/*.so
+%attr(0755,root,root) %{_libdir}/*.so
 %attr(0644,root,root) %{_libdir}/*.a
 %attr(0644,root,root) %{_libdir}/*.la
