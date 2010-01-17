@@ -4,12 +4,13 @@
 
 Summary:	Regular expressions library
 Name:		onig
-Version:	5.9.1
-Release:	%mkrel 3
+Version:	5.9.2
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.geocities.jp/kosako3/oniguruma/
 Source0:	http://www.geocities.jp/kosako3/oniguruma/archive/%{name}-%{version}.tar.gz
+Patch0:		oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
 BuildRequires:	libtool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -80,6 +81,7 @@ which requires the Oniguruma library.
 %prep
 
 %setup -q -n %{name}-%{version}
+%patch0 -p1 -b .nullreg
 
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
@@ -124,5 +126,4 @@ rm -rf %{buildroot}
 %attr(0755,root,root) %{_bindir}/*
 %attr(0644,root,root) %{_includedir}/*.h
 %attr(0755,root,root) %{_libdir}/*.so
-%attr(0644,root,root) %{_libdir}/*.a
-%attr(0644,root,root) %{_libdir}/*.la
+%attr(0644,root,root) %{_libdir}/*.*a
