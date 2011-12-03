@@ -5,14 +5,13 @@
 Summary:	Regular expressions library
 Name:		onig
 Version:	5.9.2
-Release:	%mkrel 3
+Release:	4
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.geocities.jp/kosako3/oniguruma/
 Source0:	http://www.geocities.jp/kosako3/oniguruma/archive/%{name}-%{version}.tar.gz
 Patch0:		oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
-BuildRequires:	libtool
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	autoconf automake libtool
 
 %description
 Oniguruma is a regular expressions library. The characteristics of this library
@@ -104,26 +103,15 @@ rm -rf %{buildroot}
 
 %makeinstall_std
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
+# cleanup
+rm -f %{buildroot}%{_libdir}/*.*a
 
 %files -n %{libname}
-%defattr(-,root,root)
 %doc AUTHORS COPYING HISTORY README README.ja index.html index_ja.html
 %attr(0755,root,root) %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc doc/*
 %attr(0755,root,root) %{_bindir}/*
 %attr(0644,root,root) %{_includedir}/*.h
 %attr(0755,root,root) %{_libdir}/*.so
-%attr(0644,root,root) %{_libdir}/*.*a
