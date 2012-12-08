@@ -5,13 +5,14 @@
 Summary:	Regular expressions library
 Name:		onig
 Version:	5.9.2
-Release:	4
+Release:	%mkrel 3
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.geocities.jp/kosako3/oniguruma/
 Source0:	http://www.geocities.jp/kosako3/oniguruma/archive/%{name}-%{version}.tar.gz
 Patch0:		oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
-BuildRequires:	autoconf automake libtool
+BuildRequires:	libtool
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Oniguruma is a regular expressions library. The characteristics of this library
@@ -103,15 +104,78 @@ rm -rf %{buildroot}
 
 %makeinstall_std
 
-# cleanup
-rm -f %{buildroot}%{_libdir}/*.*a
+%if %mdkversion < 200900
+%post -n %{libname} -p /sbin/ldconfig
+%endif
+
+%if %mdkversion < 200900
+%postun -n %{libname} -p /sbin/ldconfig
+%endif
+
+%clean
+rm -rf %{buildroot}
 
 %files -n %{libname}
+%defattr(-,root,root)
 %doc AUTHORS COPYING HISTORY README README.ja index.html index_ja.html
 %attr(0755,root,root) %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
+%defattr(-,root,root)
 %doc doc/*
 %attr(0755,root,root) %{_bindir}/*
 %attr(0644,root,root) %{_includedir}/*.h
 %attr(0755,root,root) %{_libdir}/*.so
+%attr(0644,root,root) %{_libdir}/*.*a
+
+
+%changelog
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 5.9.2-3mdv2011.0
++ Revision: 666942
+- mass rebuild
+
+* Fri Dec 03 2010 Oden Eriksson <oeriksson@mandriva.com> 5.9.2-2mdv2011.0
++ Revision: 607009
+- rebuild
+
+* Sun Jan 17 2010 Oden Eriksson <oeriksson@mandriva.com> 5.9.2-1mdv2010.1
++ Revision: 492630
+- 5.9.2
+- added one patch from fedora
+
+* Thu Sep 03 2009 Christophe Fergeau <cfergeau@mandriva.com> 5.9.1-3mdv2010.0
++ Revision: 426268
+- rebuild
+
+* Wed Feb 25 2009 Oden Eriksson <oeriksson@mandriva.com> 5.9.1-2mdv2009.1
++ Revision: 344933
+- rebuild
+
+* Fri Aug 22 2008 Oden Eriksson <oeriksson@mandriva.com> 5.9.1-1mdv2009.0
++ Revision: 275051
+- 5.9.1
+
+* Wed Jul 30 2008 Thierry Vignaud <tv@mandriva.org> 5.9.0-4mdv2009.0
++ Revision: 254540
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Mon Feb 18 2008 Thierry Vignaud <tv@mandriva.org> 5.9.0-2mdv2008.1
++ Revision: 171007
+- rebuild
+- fix "foobar is blabla" summary (=> "blabla") so that it looks nice in rpmdrake
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Thu Aug 16 2007 Oden Eriksson <oeriksson@mandriva.com> 5.9.0-1mdv2008.0
++ Revision: 64239
+- Import onig
+
+
+
+* Thu Aug 16 2007 Oden Eriksson <oeriksson@mandriva.com> 5.9.0-1mdv2008.0
+- initial Mandriva package
