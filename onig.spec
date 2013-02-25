@@ -1,11 +1,11 @@
-%define	major 2
-%define libname %mklibname %{name} %{major}
-%define develname %mklibname %{name} -d
+%define	major	2
+%define	libname	%mklibname %{name} %{major}
+%define	devname	%mklibname %{name} -d
 
 Summary:	Regular expressions library
 Name:		onig
 Version:	5.9.2
-Release:	4
+Release:	5
 License:	BSD
 Group:		System/Libraries
 URL:		http://www.geocities.jp/kosako3/oniguruma/
@@ -31,7 +31,7 @@ Supported character encodings:
 
 %package -n	%{libname}
 Summary:	Regular expressions library
-Group:          System/Libraries
+Group:		System/Libraries
 
 %description -n	%{libname}
 Oniguruma is a regular expressions library. The characteristics of this library
@@ -51,14 +51,14 @@ Supported character encodings:
 
 This package provides the shared Oniguruma library.
 
-%package -n	%{develname}
+%package -n	%{devname}
 Summary:	Static library and header files for development with Oniguruma
 Group:		Development/C
 Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{name}-devel
 
-%description -n	%{develname}
+%description -n	%{devname}
 Oniguruma is a regular expressions library. The characteristics of this library
 is that different character encoding for every regular expression object can be
 specified. (supported APIs: GNU regex, POSIX and Oniguruma native)
@@ -78,39 +78,32 @@ This package is only needed if you plan to develop or compile applications
 which requires the Oniguruma library.
 
 %prep
-
-%setup -q -n %{name}-%{version}
-%patch0 -p1 -b .nullreg
+%setup -q
+%patch0 -p1 -b .nullreg~
 
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
 find . -type f -perm 0444 -exec chmod 644 {} \;
 
-%build
 touch NEWS ChangeLog
 autoreconf -fis
 
-%configure2_5x
-
+%build
+%configure2_5x	--disable-static
 %make
 
 %check
 make check
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
-
-# cleanup
-rm -f %{buildroot}%{_libdir}/*.*a
 
 %files -n %{libname}
 %doc AUTHORS COPYING HISTORY README README.ja index.html index_ja.html
 %attr(0755,root,root) %{_libdir}/*.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %doc doc/*
 %attr(0755,root,root) %{_bindir}/*
 %attr(0644,root,root) %{_includedir}/*.h
