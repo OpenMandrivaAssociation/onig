@@ -8,10 +8,10 @@ Version:	5.9.3
 Release:	1
 License:	BSD
 Group:		System/Libraries
-URL:		http://www.geocities.jp/kosako3/oniguruma/
+Url:		http://www.geocities.jp/kosako3/oniguruma/
 Source0:	http://www.geocities.jp/kosako3/oniguruma/archive/%{name}-%{version}.tar.gz
 Patch0:		oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
-BuildRequires:	autoconf automake libtool
+BuildRequires:	libtool
 
 %description
 Oniguruma is a regular expressions library. The characteristics of this library
@@ -56,7 +56,6 @@ Summary:	Static library and header files for development with Oniguruma
 Group:		Development/C
 Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
-Obsoletes:	%{name}-devel
 
 %description -n	%{devname}
 Oniguruma is a regular expressions library. The characteristics of this library
@@ -100,11 +99,11 @@ make check
 %makeinstall_std
 
 %files -n %{libname}
-%doc AUTHORS COPYING HISTORY README README.ja index.html index_ja.html
-%attr(0755,root,root) %{_libdir}/*.so.%{major}*
+%{_libdir}/libonig.so.%{major}*
 
 %files -n %{devname}
 %doc doc/*
-%attr(0755,root,root) %{_bindir}/*
-%attr(0644,root,root) %{_includedir}/*.h
-%attr(0755,root,root) %{_libdir}/*.so
+%doc AUTHORS COPYING HISTORY README README.ja index.html index_ja.html
+%{_bindir}/*
+%{_includedir}/*.h
+%{_libdir}/*.so
