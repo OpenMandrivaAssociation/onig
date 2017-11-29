@@ -1,15 +1,15 @@
-%define	major	2
+%define	major	4
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
 Summary:	Regular expressions library
 Name:		onig
-Version:	5.9.3
-Release:	15
+Version:	6.6.1
+Release:	1
 License:	BSD
 Group:		System/Libraries
-Url:		http://www.geocities.jp/kosako3/oniguruma/
-Source0:	http://www.geocities.jp/kosako3/oniguruma/archive/%{name}-%{version}.tar.gz
+Url:		https://github.com/kkos/oniguruma
+Source0:	https://github.com/kkos/oniguruma/archive/v%{version}.tar.gz
 Patch0:		oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
 BuildRequires:	libtool
 
@@ -77,7 +77,7 @@ This package is only needed if you plan to develop or compile applications
 which requires the Oniguruma library.
 
 %prep
-%setup -q
+%setup -qn oniguruma-%{version}
 %patch0 -p1 -b .nullreg~
 
 # fix strange perms
@@ -89,7 +89,7 @@ touch NEWS ChangeLog
 autoreconf -fis
 
 %build
-%configure2_5x	--disable-static
+%configure
 %make
 
 %check
@@ -103,7 +103,8 @@ make check
 
 %files -n %{devname}
 %doc doc/*
-%doc AUTHORS COPYING HISTORY README README.ja index.html index_ja.html
+%doc AUTHORS COPYING HISTORY README index.html index_ja.html
 %{_bindir}/*
 %{_includedir}/*.h
 %{_libdir}/*.so
+%{_libdir}/pkgconfig/oniguruma.pc

@@ -1,6 +1,6 @@
---- onig-5.9.2/regcomp.c.debug	2010-01-05 23:13:38.000000000 +0900
-+++ onig-5.9.2/regcomp.c	2010-01-15 03:58:15.000000000 +0900
-@@ -5536,19 +5536,22 @@
+--- oniguruma-6.6.1/src/regcomp.c.nullreg~	2017-11-29 13:10:01.563465258 +0100
++++ oniguruma-6.6.1/src/regcomp.c	2017-11-29 13:12:14.314755488 +0100
+@@ -6540,19 +6540,21 @@ onig_new(regex_t** reg, const UChar* pat
  	  OnigErrorInfo* einfo)
  {
    int r;
@@ -13,18 +13,17 @@
  
 -  r = onig_reg_init(*reg, option, ONIGENC_CASE_FOLD_DEFAULT, enc, syntax);
 +  r = onig_reg_init(regg, option, ONIGENC_CASE_FOLD_DEFAULT, enc, syntax);
-   if (r) goto err;
+   if (r != 0) goto err;
  
 -  r = onig_compile(*reg, pattern, pattern_end, einfo);
 +  r = onig_compile(regg, pattern, pattern_end, einfo);
-   if (r) {
+   if (r != 0) {
    err:
 -    onig_free(*reg);
 -    *reg = NULL;
 +    onig_free(regg);
 +    regg = NULL;
    }
-+
 +  *reg = regg;
    return r;
  }
