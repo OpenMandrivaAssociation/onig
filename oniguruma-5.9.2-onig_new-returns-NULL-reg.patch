@@ -1,7 +1,7 @@
---- oniguruma-6.6.1/src/regcomp.c.nullreg~	2017-11-29 13:10:01.563465258 +0100
-+++ oniguruma-6.6.1/src/regcomp.c	2017-11-29 13:12:14.314755488 +0100
-@@ -6540,19 +6540,21 @@ onig_new(regex_t** reg, const UChar* pat
- 	  OnigErrorInfo* einfo)
+--- oniguruma-6.7.0/src/regcomp.c.nullreg~	2017-12-12 01:07:29.905542470 +0100
++++ oniguruma-6.7.0/src/regcomp.c	2017-12-12 01:08:59.779879164 +0100
+@@ -6533,19 +6533,21 @@ onig_new(regex_t** reg, const UChar* pat
+          OnigErrorInfo* einfo)
  {
    int r;
 +  regex_t *regg;
