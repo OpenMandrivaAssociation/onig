@@ -1,10 +1,10 @@
-%define	major	4
+%define	major	5
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
 Summary:	Regular expressions library
 Name:		onig
-Version:	6.7.1
+Version:	6.8.1
 Release:	1
 License:	BSD
 Group:		System/Libraries
