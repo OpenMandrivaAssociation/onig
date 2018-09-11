@@ -4,8 +4,8 @@
 
 Summary:	Regular expressions library
 Name:		onig
-Version:	6.8.2
-Release:	2
+Version:	6.9.0
+Release:	1
 License:	BSD
 Group:		System/Libraries
 Url:		https://github.com/kkos/oniguruma
