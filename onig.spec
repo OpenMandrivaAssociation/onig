@@ -5,7 +5,7 @@
 Summary:	Regular expressions library
 Name:		onig
 Version:	6.9.3
-Release:	1
+Release:	2
 License:	BSD
 Group:		System/Libraries
 Url:		https://github.com/kkos/oniguruma
@@ -90,13 +90,10 @@ autoreconf -fis
 
 %build
 %configure
-%make
-
-%check
-make check
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
 %{_libdir}/libonig.so.%{major}*
