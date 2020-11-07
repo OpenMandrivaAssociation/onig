@@ -4,7 +4,7 @@
 
 Summary:	Regular expressions library
 Name:		onig
-Version:	6.9.5
+Version:	6.9.6
 Release:	1
 License:	BSD
 Group:		System/Libraries
