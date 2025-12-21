@@ -11,6 +11,11 @@ Group:		System/Libraries
 Url:		https://github.com/kkos/oniguruma
 Source0:	https://github.com/kkos/oniguruma/archive/v%{version}.tar.gz
 Patch0:		oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libtool
 
 %description
