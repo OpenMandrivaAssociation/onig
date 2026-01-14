@@ -4,19 +4,20 @@
 
 Summary:	Regular expressions library
 Name:		onig
-Version:	6.9.9
+Version:	6.9.10
 Release:	1
 License:	BSD
 Group:		System/Libraries
 Url:		https://github.com/kkos/oniguruma
 Source0:	https://github.com/kkos/oniguruma/archive/v%{version}.tar.gz
-Patch0:		oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
+BuildSystem:	autotools
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
-BuildRequires:	libtool
+
+%patchlist
+oniguruma-5.9.2-onig_new-returns-NULL-reg.patch
 
 %description
 Oniguruma is a regular expressions library. The characteristics of this library
@@ -81,10 +82,7 @@ Supported character encodings:
 This package is only needed if you plan to develop or compile applications
 which requires the Oniguruma library.
 
-%prep
-%setup -qn oniguruma-%{version}
-%patch0 -p1 -b .nullreg~
-
+%prep -a
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
@@ -92,13 +90,6 @@ find . -type f -perm 0444 -exec chmod 644 {} \;
 
 touch NEWS ChangeLog
 autoreconf -fis
-
-%build
-%configure
-%make_build
-
-%install
-%make_install
 
 %files -n %{libname}
 %{_libdir}/libonig.so.%{major}*
